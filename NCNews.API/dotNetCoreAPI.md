@@ -144,3 +144,18 @@ public void ConfigureServices(IServiceCollection services)
 6. Configure CORS(Cross Origin Resource Sharing) policy
     Enables interaction across the pipe(Globally)
     
+    Add Cors to ConfigureServices() (Startup.cs)
+        
+    ```
+        services.AddCors(o =>
+        {
+            o.AddPolicy("CorsPolicy", builder =>
+            builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+        });
+    ```
+    and to Configure()
+    ```
+        app.UseCors("CorsPolicy");
+    ```
