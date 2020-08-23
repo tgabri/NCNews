@@ -12,6 +12,11 @@ using NCNews.API.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
+using NCNews.API.Contracts;
+using NCNews.API.Services;
 
 namespace NCNews.API
 {
@@ -33,6 +38,21 @@ namespace NCNews.API
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("version1", new OpenApiInfo
+                {
+                    Title = "NCNews API",
+                    Version = "version1",
+                    Description = "An educational API for a new feed page"
+                });
+                var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
+                c.IncludeXmlComments(xpath);
+            });
+
+            services.AddSingleton<ILoggerService, LoggerService>();
+
             services.AddControllers();
         }
 
@@ -50,6 +70,12 @@ namespace NCNews.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/version1/swagger.json", "NCNews API");
+            });
 
             app.UseHttpsRedirection();
 
