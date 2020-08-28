@@ -17,6 +17,8 @@ using System.Reflection;
 using System.IO;
 using NCNews.API.Contracts;
 using NCNews.API.Services;
+using AutoMapper;
+using NCNews.API.Mappings;
 
 namespace NCNews.API
 {
@@ -45,6 +47,8 @@ namespace NCNews.API
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
+
+            services.AddAutoMapper(typeof(Maps));
 
             services.AddSwaggerGen(c =>
             {

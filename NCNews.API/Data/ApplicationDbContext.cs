@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NCNews.API.Models;
 
 namespace NCNews.API.Data
 {
@@ -12,5 +13,9 @@ namespace NCNews.API.Data
             : base(options)
         {
         }
+
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }

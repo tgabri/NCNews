@@ -159,3 +159,28 @@ public void ConfigureServices(IServiceCollection services)
     ```
         app.UseCors("CorsPolicy");
     ```
+7. Add EF to the project
+  -   Microsoft.EntityFrameworkCore.InMemory
+  -   Microsoft.EntityFrameworkCore.SqlServer
+
+8. Add AutoMapper to the project
+  - Install AutoMapper
+  - Install AutoMapper.Extensions.Microsoft.DependencyInjection
+  - Create a folder called Mappings
+  - Add new Class Maps.cs    
+  - Inherit Maps from Profile (AutoMapper) and create maps
+    ```
+       public class Maps : Profile
+       {
+        public Maps()
+        {
+            CreateMap<Class, ClassDTO>().ReverseMap();
+        }
+       }
+    ```
+  - Add AutoMapper to services in Startup.cs
+    ```
+       services.AddAutoMapper(typeof(Maps));
+    ```
+9. Create DTO folder for dto files
+10. 
