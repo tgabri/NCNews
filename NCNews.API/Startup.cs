@@ -64,8 +64,12 @@ namespace NCNews.API
             });
 
             services.AddSingleton<ILoggerService, LoggerService>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<ITopicRepository, TopicRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opts =>
+            opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +91,7 @@ namespace NCNews.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/version1/swagger.json", "NCNews API");
+                c.RoutePrefix = "";
             });
 
             app.UseHttpsRedirection();

@@ -49,6 +49,7 @@ public void ConfigureServices(IServiceCollection services)
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/version1/swagger.json", "NCNews API");
+                c.RoutePrefix = "";
             });        
         }
         ```
@@ -183,4 +184,37 @@ public void ConfigureServices(IServiceCollection services)
        services.AddAutoMapper(typeof(Maps));
     ```
 9. Create DTO folder for dto files
-10. 
+10. Create a 'base' repository Interface
+    ```
+       public interface IRepositoryBase<T> where T : class
+       {
+            Task<IList<T>> FindAll();
+            Task<T> FindById(int id);
+            Task<bool> Create(T model);
+            Task<bool> Update(T model);
+            Task<bool> Delete(T model);
+            Task<bool> Save();
+       }
+    ```
+11. Create an Interface for each models, replace 'Model' with models from the project
+    ```
+        public interface IModelRepository : IRepositoryBase<Model>
+        {
+        }
+    ```
+12. Implement the interface in a model repository class
+    ```
+         public class ModelRepository : IModelRepository
+         {
+         }
+    ```
+    and add it to Startup.cs/ConfigureServices()
+    ```
+        services.AddScoped<IModelRepository, ModelRepository>();
+    ```
+13. Install and add 'Microsoft.AspNetCore.Mvc.NewtonsoftJson' to the project
+    Startup.cs/ConfigureServices()
+    ```
+        services.AddControllers().AddNewtonsoftJson(opts =>
+         opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+    ```

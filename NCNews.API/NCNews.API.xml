@@ -4,5 +4,15 @@
         <name>NCNews.API</name>
     </assembly>
     <members>
+        <member name="T:NCNews.API.Controllers.ArticlesController">
+            <summary>
+            Endpoint used to interact with Articles
+            </summary>
+        </member>
+        <member name="T:NCNews.API.Controllers.AuthorsController">
+            <summary>
+            Endpoint used to interact with Authors
+            </summary>
+        </member>
     </members>
 </doc>
