@@ -15,6 +15,8 @@ namespace NCNews.API.Mappings
             CreateMap<Author, AuthorDTO>().ReverseMap();
             CreateMap<Topic, TopicDTO>().ReverseMap();
             CreateMap<Article, ArticleDTO>().ReverseMap();
+            CreateMap<Article, ArticleCreateDTO>().ReverseMap();
+            CreateMap<Article, ArticleUpdateDTO>().ReverseMap();
         }
     }
 }

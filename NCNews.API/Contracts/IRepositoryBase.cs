@@ -10,6 +10,7 @@ namespace NCNews.API.Contracts
         Task<IList<T>> FindAll();
         Task<T> FindById(int id);
         Task<bool> Create(T model);
+        Task<bool> IsExists(int id);
         Task<bool> Update(T model);
         Task<bool> Delete(T model);
         Task<bool> Save();

@@ -1,0 +1,4 @@
+2020-08-29 13:22:00.0415 INFO Attempted to get all articles 
+2020-08-29 13:22:02.3715 INFO Successfully got all articles
+2020-08-29 13:37:34.3241 INFO Attempted to get an article with id: 1
+2020-08-29 13:37:36.0483 WARN Article with id: 1 was not found

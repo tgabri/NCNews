@@ -7,7 +7,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\tgabo\Desktop\Projects\ASP.NET Core\NCNews\NCNews.API\NCNews.API.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591;</NoWarn>
+    <NoWarn>1701;1702;1591;1572;1573;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +31,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.5.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

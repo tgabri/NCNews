@@ -41,6 +41,11 @@ namespace NCNews.API.Services
             return article;
         }
 
+        public async Task<bool> IsExists(int id)
+        {
+            return await _db.Articles.AnyAsync(a => a.Id == id);
+        }
+
         public async Task<bool> Save()
         {
             var changes = await _db.SaveChangesAsync();

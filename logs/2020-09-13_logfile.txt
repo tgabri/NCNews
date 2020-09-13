@@ -1,0 +1,2 @@
+2020-09-13 14:08:19.8900 INFO Attempted to get all articles
+2020-09-13 14:08:21.0294 INFO Successfully got all articles

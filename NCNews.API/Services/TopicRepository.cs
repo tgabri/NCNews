@@ -41,6 +41,11 @@ namespace NCNews.API.Services
             return topic;
         }
 
+        public Task<bool> IsExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Save()
         {
             var changes = await _db.SaveChangesAsync();
