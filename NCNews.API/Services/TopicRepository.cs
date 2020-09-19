@@ -41,9 +41,9 @@ namespace NCNews.API.Services
             return topic;
         }
 
-        public Task<bool> IsExists(int id)
+        public async Task<bool> IsExists(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Topics.AnyAsync(t => t.Id == id);
         }
 
         public async Task<bool> Save()

@@ -6,7 +6,7 @@
     <members>
         <member name="T:NCNews.API.Controllers.ArticlesController">
             <summary>
-            Endpoint used to interact with Articles
+            Endpoint used to interact with Articles table
             </summary>
         </member>
         <member name="M:NCNews.API.Controllers.ArticlesController.GetArticles">
@@ -36,10 +36,35 @@
             <param name="article"></param>
             <returns></returns>
         </member>
+        <member name="M:NCNews.API.Controllers.ArticlesController.Delete(System.Int32)">
+            <summary>
+            Delete article
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:NCNews.API.Controllers.AuthorsController">
             <summary>
             Endpoint used to interact with Authors
             </summary>
+        </member>
+        <member name="T:NCNews.API.Controllers.TopicsController">
+            <summary>
+            Endpoint used to interact with Topics table
+            </summary>
+        </member>
+        <member name="M:NCNews.API.Controllers.TopicsController.GetBooks">
+            <summary>
+            Get all Topics
+            </summary>
+            <returns>Topics</returns>
+        </member>
+        <member name="M:NCNews.API.Controllers.TopicsController.GetBook(System.Int32)">
+            <summary>
+            Get a book by Id
+            </summary>
+            <param name="id"></param>
+            <returns>A Book</returns>
         </member>
     </members>
 </doc>

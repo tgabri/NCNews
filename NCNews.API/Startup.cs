@@ -52,11 +52,11 @@ namespace NCNews.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("version1", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "NCNews API",
-                    Version = "version1",
-                    Description = "An educational API for a new feed page"
+                    Version = "v1",
+                    Description = "An educational API for a news feed page"
                 });
                 var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
@@ -90,7 +90,7 @@ namespace NCNews.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/version1/swagger.json", "NCNews API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "NCNews API");
                 c.RoutePrefix = "";
             });
 
