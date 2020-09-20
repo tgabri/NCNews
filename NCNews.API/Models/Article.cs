@@ -17,8 +17,7 @@ namespace NCNews.API.Models
         public int Votes { get; set; }
 
         public int TopicId { get; set; }
-        public virtual Topic Topic { get; set; }
-        public int AuthorId { get; set; }
+
         public Author Author { get; set; }
     }
 }

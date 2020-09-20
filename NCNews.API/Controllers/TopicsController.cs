@@ -87,6 +87,15 @@ namespace NCNews.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Create topic
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <returns>Topic object</returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] TopicCreateDTO topicCreateDTO)
         {
             var location = GetControllerActionNames();
@@ -110,7 +119,97 @@ namespace NCNews.API.Controllers
                     return InternalError(LogMessages.CreateFailed(location));
                 }
                 _logger.LogInfo(LogMessages.Success(location));
+                _logger.LogInfo($"{topic}");
                 return Created("Create", new { topic });
+            }
+            catch (Exception e)
+            {
+                return InternalError(LogMessages.InternalError(location, e.Message, e.InnerException));
+            }
+        }
+
+        /// <summary>
+        /// Update topic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="topic"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] TopicUpdateDTO topicUpdateDTO)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.LogInfo(LogMessages.AttemptedToUpdate(location, id));
+                if (id < 1 || topicUpdateDTO == null || id != topicUpdateDTO.Id)
+                {
+                    _logger.LogWarn(LogMessages.BadData(location, id));
+                    return BadRequest();
+                }
+                var isExists = await _topicRepository.IsExists(id);
+                if (!isExists)
+                {
+                    _logger.LogWarn(LogMessages.NotFound(location, id));
+                    return NotFound();
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarn(LogMessages.IncompleteData(location, id));
+                    return BadRequest(ModelState);
+                }
+                var topic = _mapper.Map<Topic>(topicUpdateDTO);
+                var isSuccess = await _topicRepository.Update(topic);
+                if (!isSuccess)
+                {
+                    return InternalError(LogMessages.UpdateFailed(location, id));
+                }
+                _logger.LogInfo(LogMessages.Success(location, id));
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError(LogMessages.InternalError(location, e.Message, e.InnerException));
+            }
+        }
+
+        /// <summary>
+        /// Delete topic by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.LogInfo(LogMessages.AttemptedToDelete(location, id));
+                if (id < 1)
+                {
+                    _logger.LogWarn(LogMessages.BadData(location, id));
+                    return BadRequest();
+                }
+                var isExists = await _topicRepository.IsExists(id);
+                if (!isExists)
+                {
+                    _logger.LogWarn(LogMessages.NotFound(location, id));
+                    return NotFound();
+                }
+                var topic = await _topicRepository.FindById(id);
+                var isSuccess = await _topicRepository.Delete(topic);
+                if (!isSuccess)
+                {
+                    return InternalError(LogMessages.DeleteFailed(location, id));
+                }
+                _logger.LogInfo(LogMessages.Success(location, id));
+                return NoContent();
             }
             catch (Exception e)
             {

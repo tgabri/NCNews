@@ -1,0 +1,22 @@
+2020-09-19 15:39:35.6961 INFO Topics/Create: Attempted to create
+2020-09-19 15:39:35.8629 ERROR Topics/Create: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Topic
+System.Object -> NCNews.API.Models.Topic - 
+2020-09-19 15:39:43.0042 INFO Topics/GetTopics: Attempted to get all
+2020-09-19 15:39:44.6301 INFO Topics/GetTopics: Successful
+2020-09-19 15:42:29.2014 INFO Topics/Create: Attempted to create
+2020-09-19 15:42:30.4734 INFO Topics/Create: Successful
+2020-09-19 15:42:30.4834 INFO NCNews.API.Models.Topic
+2020-09-19 16:12:35.6758 INFO Topics/GetTopics: Attempted to get all
+2020-09-19 16:12:36.1092 INFO Topics/GetTopics: Successful
+2020-09-19 16:13:21.3438 INFO Articles/GetArticles: Attempted to get all
+2020-09-19 16:13:21.3949 INFO Articles/GetArticles: Successful
+2020-09-19 16:45:42.1065 INFO Topics/Update/1:Attempted to update
+2020-09-19 16:45:43.4278 INFO Topics/Update/1: Successful
+2020-09-19 16:46:08.9629 INFO Topics/GetTopics: Attempted to get all
+2020-09-19 16:46:09.1024 INFO Topics/GetTopics: Successful
+2020-09-19 16:50:16.2136 INFO Articles/Create: Attempted to create
+2020-09-19 16:50:16.3323 INFO Articles/Create: Successful
+2020-09-19 16:50:16.3402 INFO NCNews.API.Models.Article

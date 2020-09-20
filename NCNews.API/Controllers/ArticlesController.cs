@@ -89,7 +89,7 @@ namespace NCNews.API.Controllers
         /// Create article
         /// </summary>
         /// <param name="article"></param>
-        /// <returns></returns>
+        /// <returns>Article object</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,6 +117,8 @@ namespace NCNews.API.Controllers
                     return InternalError(LogMessages.CreateFailed(location));
                 }
                 _logger.LogInfo(LogMessages.Success(location));
+                _logger.LogInfo($"{article}");
+
                 return Created("Create", new { article });
             }
             catch (Exception e)

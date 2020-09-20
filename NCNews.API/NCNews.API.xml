@@ -26,7 +26,7 @@
             Create article
             </summary>
             <param name="article"></param>
-            <returns></returns>
+            <returns>Article object</returns>
         </member>
         <member name="M:NCNews.API.Controllers.ArticlesController.Update(System.Int32,NCNews.API.DTOs.ArticleUpdateDTO)">
             <summary>
@@ -53,18 +53,40 @@
             Endpoint used to interact with Topics table
             </summary>
         </member>
-        <member name="M:NCNews.API.Controllers.TopicsController.GetBooks">
+        <member name="M:NCNews.API.Controllers.TopicsController.GetTopics">
             <summary>
             Get all Topics
             </summary>
-            <returns>Topics</returns>
+            <returns>List of Topics</returns>
         </member>
-        <member name="M:NCNews.API.Controllers.TopicsController.GetBook(System.Int32)">
+        <member name="M:NCNews.API.Controllers.TopicsController.GetTopic(System.Int32)">
             <summary>
-            Get a book by Id
+            Get a Topic by Id
             </summary>
             <param name="id"></param>
             <returns>A Book</returns>
+        </member>
+        <member name="M:NCNews.API.Controllers.TopicsController.Create(NCNews.API.DTOs.TopicCreateDTO)">
+            <summary>
+            Create topic
+            </summary>
+            <param name="topic"></param>
+            <returns>Topic object</returns>
+        </member>
+        <member name="M:NCNews.API.Controllers.TopicsController.Update(System.Int32,NCNews.API.DTOs.TopicUpdateDTO)">
+            <summary>
+            Update topic
+            </summary>
+            <param name="id"></param>
+            <param name="topic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NCNews.API.Controllers.TopicsController.Delete(System.Int32)">
+            <summary>
+            Delete topic by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

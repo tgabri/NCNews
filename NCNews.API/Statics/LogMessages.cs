@@ -11,7 +11,7 @@ namespace NCNews.API.Statics
         public static string AttemptedToGet(string location) => $"{location}: Attempted to get all";
         public static string AttemptedToGet(string location, int id) => $"{location}/{id}: Attempted to get";
         public static string AttemptedToCreate(string location) => $"{location}: Attempted to create";
-        public static string AttemptedToUpdate(string location, int id) => $"{location}/{id}:Attempted to update";
+        public static string AttemptedToUpdate(string location, int id) => $"{location}/{id}: Attempted to update";
         public static string AttemptedToDelete(string location, int id) => $"{location}/{id}: Attempted to delete";
 
         public static string Success(string location) => $"{location}: Successful";

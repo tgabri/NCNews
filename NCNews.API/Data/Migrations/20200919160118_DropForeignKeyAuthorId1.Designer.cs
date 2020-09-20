@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NCNews.API.Data;
 
 namespace NCNews.API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200919160118_DropForeignKeyAuthorId1")]
+    partial class DropForeignKeyAuthorId1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,8 +234,8 @@ namespace NCNews.API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
@@ -252,8 +254,6 @@ namespace NCNews.API.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.HasIndex("TopicId");
 
@@ -341,10 +341,6 @@ namespace NCNews.API.Data.Migrations
 
             modelBuilder.Entity("NCNews.API.Models.Article", b =>
                 {
-                    b.HasOne("NCNews.API.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
                     b.HasOne("NCNews.API.Models.Topic", null)
                         .WithMany("Articles")
                         .HasForeignKey("TopicId")

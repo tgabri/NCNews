@@ -14,7 +14,6 @@ namespace NCNews.API.DTOs
         public DateTime CreatedAt { get; set; }
         public int Votes { get; set; }
         public int TopicId { get; set; }
-        public virtual TopicDTO Topic { get; set; }
         public int AuthorId { get; set; }
         public AuthorDTO Author { get; set; }
     }
@@ -44,6 +43,7 @@ namespace NCNews.API.DTOs
         public DateTime CreatedAt { get; set; }
         public int Votes { get; set; }
         public int TopicId { get; set; }
-        public int AuthorId { get; set; }
+
+        // TODO - Find Out If AuthorID is needed for update ones there is a registered user
     }
 }
