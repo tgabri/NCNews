@@ -88,5 +88,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:NCNews.API.Controllers.UsersController.Login(NCNews.API.DTOs.UserLoginDTO)">
+            <summary>
+            User login endpoint
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

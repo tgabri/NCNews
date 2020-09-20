@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCNews.API.Contracts;
 using NCNews.API.DTOs;
+using NCNews.API.Helpers;
 using NCNews.API.Models;
 using NCNews.API.Statics;
 
@@ -93,6 +95,7 @@ namespace NCNews.API.Controllers
         /// <param name="topic"></param>
         /// <returns>Topic object</returns>
         [HttpPost]
+        [Authorize(Roles = RoleNames.ADMIN)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -135,6 +138,7 @@ namespace NCNews.API.Controllers
         /// <param name="topic"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = RoleNames.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -181,6 +185,7 @@ namespace NCNews.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = RoleNames.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

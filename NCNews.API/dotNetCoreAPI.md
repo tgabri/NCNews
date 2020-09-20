@@ -4,24 +4,24 @@
 1. Create a project using Web Application with Authentication.(Not API)
 2. Remove unnecessary files, folders (wwwroot, Areas and Pages folders) 
 3. Make some changes to startup.cs
-```
-public void ConfigureServices(IServiceCollection services)
-        {
-            delete=> services.AddRazorPages(); //not needed for api
-           
-            add=> services.AddControllers();
-        }
-
- public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            delete=> app.UseStaticFiles(); 
-            app.UseEndpoints(endpoints =>
+    ```
+    public void ConfigureServices(IServiceCollection services)
             {
-                change from=> endpoints.MapRazorPages();
-                to=> endpoints.MapControllers();
-            });
-        }
-```
+                delete=> services.AddRazorPages(); //not needed for api
+           
+                add=> services.AddControllers();
+            }
+
+     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            {
+                delete=> app.UseStaticFiles(); 
+                app.UseEndpoints(endpoints =>
+                {
+                    change from=> endpoints.MapRazorPages();
+                    to=> endpoints.MapControllers();
+                });
+            }
+    ```
 4. Add Swagger to your project
  
    1. Install NuGets:
@@ -276,5 +276,55 @@ public void ConfigureServices(IServiceCollection services)
                 SeedData.Seed(userManager, roleManager).Wait();  // .Wait() because Seed() is async
             }
         ```
+15. Add JSON Web Token to the project
+    - Install Microsoft.AspNetCore.Authentication.JwtBearer from Package Manager
+    - Add JWT configuration to appsettings.json
+        ```
+            "Jwt": {
+                "Key": "373fe963-6d19-4326-b3d4-f220de95106e", //<- Generated GUID
+                "Issuer": "test.com"                           //<- Set an issuer
+              }
+        ```
+    - Add JWT to Startup.cs/ConfigureServices()
+        ```
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(o =>
+                {
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
+        ```
+    - Create a method that generates WebToken in a User related controller eg. UsersController
+        ```
+            private async Task<string> GenerateJSONWebToken(IdentityUser user)
+            {
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
+                };
+                var roles = await _userManager.GetRolesAsync(user);
+                claims.AddRange(roles.Select(r => new Claim(ClaimsIdentity.DefaultRoleClaimType, r)));
 
+                var token = new JwtSecurityToken(
+                    _configuration["Jwt:Issuer"],
+                    _configuration["Jwt:Issuer"],
+                    claims,
+                    null,
+                    expires: DateTime.Now.AddHours(3),
+                   signingCredentials: credentials
+                    );
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+        ```
     

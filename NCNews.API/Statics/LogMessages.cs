@@ -32,5 +32,7 @@ namespace NCNews.API.Statics
         public static string UpdateFailed(string location, int id) => $"{location}/{id}: Update failed";
 
         public static string DeleteFailed(string location, int id) => $"{location}/{id}: Delete failed";
+
+        public static string Unathorized(string location) => $"{location}: Not Authenticated";
     }
 }

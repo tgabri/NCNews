@@ -1,0 +1,2 @@
+2020-09-20 15:10:12.4228 INFO Users/Login: Attempted to create
+2020-09-20 15:10:12.6425 INFO Users/Login: Successful
